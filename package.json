@@ -1,39 +1,52 @@
 {
-  "name": "node12-template-action",
-  "version": "0.0.0",
-  "private": true,
-  "description": "Node 12 template action",
-  "main": "lib/main.js",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
+  "name": "action-node-draft-releaser",
+  "version": "1.0.0-beta.1",
+  "description": "Automatically publish an existing Draft Release when the \"package.json\" version changes",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/node12-template.git"
+    "url": "git+https://github.com/JamesMGreene/action-node-draft-releaser.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "James M. Greene",
+    "email": "james.m.greene@gmail.com",
+    "url": "https://jamesmgreene.github.io/"
   },
   "keywords": [
     "actions",
     "node",
-    "setup"
+    "draft-release"
   ],
-  "author": "GitHub",
-  "license": "MIT",
+  "main": "lib/main.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "action.yml",
+    "LICENSE.md",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "lint": "tslint -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "build": "tsc",
+    "test": "jest",
+    "prepare": "npm run build",
+    "release": "scripts/cut-release.sh"
+  },
   "dependencies": {
     "@actions/core": "^1.0.0",
-    "@actions/io": "^1.0.0",
-    "@actions/exec": "^1.0.0",
-    "@actions/github": "^1.0.0",
-    "@actions/tool-cache": "^1.0.0",
-    "semver": "^6.1.1"
+    "@actions/github": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.13",
-    "@types/node": "^12.0.4",
-    "@types/semver": "^6.0.0",
+    "@types/jest": "^24.0.17",
+    "@types/node": "^12.7.2",
     "jest": "^24.8.0",
-    "jest-circus": "^24.7.1",
+    "jest-circus": "^24.8.0",
+    "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.1"
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3"
   }
 }

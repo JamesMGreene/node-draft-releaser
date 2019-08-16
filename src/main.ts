@@ -2,10 +2,10 @@ import * as core from '@actions/core';
 
 async function run() {
   try {
-    const myInput = core.getInput('myInput');
-    core.debug(`Hello ${myInput}`);
-  } catch (error) {
-    core.setFailed(error.message);
+    const repoToken = core.getInput('repo_token', { required: true });
+    core.debug(`Hello ${repoToken}`);
+  } catch (err) {
+    core.setFailed(err.message);
   }
 }
 

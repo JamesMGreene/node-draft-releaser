@@ -1,10 +1,13 @@
-name: 'Node 12 Template Action'
-description: 'Get started with Node actions'
-author: 'GitHub'
-inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+name: 'Node Draft Releaser'
+description: 'Automatically publish an existing Draft Release when the "package.json" version changes'
+author: 'JamesMGreene'
+inputs:
+  repo_token:
+    description: 'The repo-specific secret variable GITHUB_TOKEN'
+    required: true
+branding:
+  icon: 'tag'      # vector art to display in the GitHub Marketplace
+  color: 'orange'  # decorates the entry in the GitHub Marketplace
 runs:
   using: 'node12'
   main: 'lib/main.js'

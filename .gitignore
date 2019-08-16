@@ -1,2 +1,2 @@
 node_modules/
-__tests__/runner/*
+tests/runner/
