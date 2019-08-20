@@ -40,7 +40,7 @@ MAJOR_VERSION=${VERSION_PARTS[0]}
 git add package*.json
 
 # Commit the changes to the "master" branch
-git commit -m 'Bump version to ${PKG_VERSION}'
+git commit -m "Bump version to ${PKG_VERSION}"
 
 # Push the latest "master" branch
 git push origin
