@@ -1,11 +1,7 @@
 {
-  "name": "action-node-draft-releaser",
+  "name": "node-draft-releaser",
   "version": "1.0.0-beta.1",
   "description": "Automatically publish an existing Draft Release when the \"package.json\" version changes",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JamesMGreene/action-node-draft-releaser.git"
-  },
   "license": "MIT",
   "author": {
     "name": "James M. Greene",
@@ -17,7 +13,15 @@
     "node",
     "draft-release"
   ],
-  "main": "lib/main.js",
+  "homepage": "https://github.com/JamesMGreene/node-draft-releaser#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesMGreene/node-draft-releaser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesMGreene/node-draft-releaser/issues"
+  },
+  "main": "lib/run.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*",
@@ -36,13 +40,18 @@
   },
   "dependencies": {
     "@actions/core": "^1.0.0",
-    "@actions/github": "^1.0.0"
+    "@actions/github": "^1.0.0",
+    "semver": "^6.3.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.17",
+    "@types/nock": "^10.0.3",
     "@types/node": "^12.7.2",
+    "@types/semver": "^6.0.1",
+    "dotenv": "^8.0.0",
     "jest": "^24.8.0",
     "jest-circus": "^24.8.0",
+    "nock": "^10.0.6",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",

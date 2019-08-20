@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getVersion should throw if no "package.json" is found in the workspace 1`] = `"\\"package.json\\" could not be found in your project's root."`;

@@ -1,0 +1,25 @@
+{
+  "name": "node-draft-releaser",
+  "version": "1.0.0-beta.2",
+  "description": "Automatically publish an existing Draft Release when the \"package.json\" version changes",
+  "license": "MIT",
+  "author": {
+    "name": "James M. Greene",
+    "email": "james.m.greene@gmail.com",
+    "url": "https://jamesmgreene.github.io/"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "draft-release"
+  ],
+  "homepage": "https://github.com/JamesMGreene/node-draft-releaser#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesMGreene/node-draft-releaser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesMGreene/node-draft-releaser/issues"
+  },
+  "main": "lib/main.js"
+}

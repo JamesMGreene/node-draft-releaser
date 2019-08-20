@@ -2,12 +2,17 @@ name: 'Node Draft Releaser'
 description: 'Automatically publish an existing Draft Release when the "package.json" version changes'
 author: 'JamesMGreene'
 inputs:
-  repo_token:
-    description: 'The repo-specific secret variable GITHUB_TOKEN'
-    required: true
+  allow_unmatched_draft_tag:
+    description: 'Should this be allowed to publish an existing Draft Release that is not slated to create a Tag matching the new version number?'
+    default: 'true'
+outputs:
+  version:
+    description: 'The new version number that was released'
+  release_url:
+    description: 'The URL to view the published Release page in the GitHub UI'
+runs:
+  using: 'node12'
+  main: 'lib/run.js'
 branding:
   icon: 'tag'      # vector art to display in the GitHub Marketplace
   color: 'orange'  # decorates the entry in the GitHub Marketplace
-runs:
-  using: 'node12'
-  main: 'lib/main.js'
