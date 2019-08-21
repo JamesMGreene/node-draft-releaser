@@ -25,7 +25,7 @@ npm run build
 BUMP_LEVEL=${1:-patch}
 
 # Bump the version and capture the new version (vX.Y.Z)
-PKG_VERSION=$(npm version ${BUMP_LEVEL})
+PKG_VERSION=$(npm version ${BUMP_LEVEL} --no-git-tag-version)
 
 # Remove the first character from the version (vX.Y.Z -> X.Y.Z)
 PKG_VERSION=${PKG_VERSION#?}
