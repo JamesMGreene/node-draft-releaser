@@ -99,3 +99,9 @@ git branch -D ${RELEASE_BRANCH}
 
 # Push the new tags
 git push origin --tags
+
+# Remove the "node_modules/" directory
+rm -rf node_modules/
+
+# Reinstall the full set of dependencies
+npm install
