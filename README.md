@@ -113,7 +113,7 @@ jobs:
           RELEASE_URL: ${{ steps.github_release.outputs.release_url }}
 ```
 
-### Including Publishing to GitHub Package Registry
+#### Including Publishing to GitHub Package Registry
 
 Another great chaining opportunity is following this Action with one to publish the new version to the GitHub Package Registry.
 
