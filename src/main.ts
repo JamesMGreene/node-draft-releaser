@@ -4,7 +4,7 @@ import getDraftReleases from './get-draft-releases';
 import getTagNames from './get-tag-names';
 import getVersion from './get-version';
 import publishDraftRelease from './publish-draft-release';
-import verifyRequiredSecrets from './verify-required-secrets';
+import verifyRequiredEnv from './verify-required-env';
 import verifyVersionBump from './verify-version-bump';
 
 function setNeutralCancellation(message: string): void {
@@ -14,8 +14,8 @@ function setNeutralCancellation(message: string): void {
 
 async function main() {
   try {
-    // Verify all required secrets exist, or else throw
-    verifyRequiredSecrets();
+    // Verify all required environment variables and secrets exist, or else throw
+    verifyRequiredEnv();
 
     // Verify the triggering event is a PushEvent
     if (process.env.GITHUB_EVENT_NAME !== 'push') {

@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`verifyRequiredEnv should throw if all of the required environment variables and secrets are missing values 1`] = `
+"The following environment variables are required for this GitHub Action to run:
+- GITHUB_EVENT_NAME
+- GITHUB_REF
+- GITHUB_REPOSITORY
+- GITHUB_SHA
+- GITHUB_WORKSPACE"
+`;
+
+exports[`verifyRequiredEnv should throw if all of the required environment variables are missing values 1`] = `
+"The following environment variables are required for this GitHub Action to run:
+- GITHUB_EVENT_NAME
+- GITHUB_REF
+- GITHUB_REPOSITORY
+- GITHUB_SHA
+- GITHUB_WORKSPACE"
+`;
+
+exports[`verifyRequiredEnv should throw if all of the required secrets are missing values 1`] = `
+"The following secrets are required for this GitHub Action to run:
+- GITHUB_TOKEN"
+`;
+
+exports[`verifyRequiredEnv should throw if none of the required environment variables exist 1`] = `
+"The following environment variables are required for this GitHub Action to run:
+- GITHUB_EVENT_NAME
+- GITHUB_REF
+- GITHUB_REPOSITORY
+- GITHUB_SHA
+- GITHUB_WORKSPACE"
+`;
+
+exports[`verifyRequiredEnv should throw if none of the required environment variables or secrets exist 1`] = `
+"The following environment variables are required for this GitHub Action to run:
+- GITHUB_EVENT_NAME
+- GITHUB_REF
+- GITHUB_REPOSITORY
+- GITHUB_SHA
+- GITHUB_WORKSPACE"
+`;
+
+exports[`verifyRequiredEnv should throw if none of the required secrets exist 1`] = `
+"The following secrets are required for this GitHub Action to run:
+- GITHUB_TOKEN"
+`;
+
+exports[`verifyRequiredEnv should throw if some of the required environment variables and secrets are missing values 1`] = `
+"The following environment variables are required for this GitHub Action to run:
+- GITHUB_EVENT_NAME
+- GITHUB_REF
+- GITHUB_SHA"
+`;
+
+exports[`verifyRequiredEnv should throw if some of the required environment variables and secrets are missing values 2`] = `
+"The following secrets are required for this GitHub Action to run:
+- GITHUB_TOKEN"
+`;
+
+exports[`verifyRequiredEnv should throw if some of the required environment variables are missing values 1`] = `
+"The following environment variables are required for this GitHub Action to run:
+- GITHUB_EVENT_NAME
+- GITHUB_REF
+- GITHUB_SHA"
+`;
