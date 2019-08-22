@@ -4,11 +4,43 @@
 
 Automatically publish an existing Draft Release when the `"package.json"` version changes.
 
-This Action [pairs](#sample-cooperative-workflow-including-release-drafter) exquisitely well with [Release Drafter](https://github.com/marketplace/actions/release-drafter).
+This Action [pairs](#including-release-drafter) exquisitely well with [Release Drafter](https://github.com/marketplace/actions/release-drafter).
 
-It is also a great addition to any workflows that culminate in [publishing a Node package to an NPM Registry such as the GitHub Package Registry](#sample-workflows-including-publishing-to-github-package-registry).
+It is also a great addition to any workflows that culminate in [publishing a Node package to an NPM Registry such as the GitHub Package Registry](#including-publishing-to-github-package-registry).
 
 ## Usage
+
+### Configuration
+
+#### Secrets
+
+In addition to a handful of the standard environment variables provided during a GitHub Actions workflow run, this Action also expects the following Secret(s) to be provided:
+
+ - `GITHUB_TOKEN` _(required)_
+     - The [`GITHUB_TOKEN` Secret](https://help.github.com/en/articles/virtual-environments-for-github-actions#github_token-secret) is a GitHub App installation token scoped to a repository. GitHub creates the `GITHUB_TOKEN` secret for you by default, but you must include it in your workflow file in order for this Action to use it.
+
+#### Inputs
+
+This Action can react to the following inputs:
+
+ - `allow_unmatched_draft_tag` _(optional)_
+     - Should this Action be allowed to publish an existing Draft Release that is _not_ slated to create a Tag matching the new version number?
+     - Valid values: `'true'` or `'false'` _(as a **string**)_
+     - Defaults to `'true'`.
+
+#### Outputs
+
+This Action provides the following outputs:
+
+ - `version`
+     - The new version number that was released, e.g. `1.0.0-beta.2`
+
+ - `release_url`
+     - The URL to view the published Release page in the GitHub UI
+
+## Examples
+
+### Basic Usage
 
 In one of your GitHub Actions V2 workflow YAML files:
 
@@ -25,7 +57,7 @@ on:
       - package.json
 
 jobs:
-  release:
+  publish_draft_release_on_version_bump:
     runs-on: ubuntu-latest
     steps:
       # Does a checkout of your repository at the pushed commit SHA
@@ -38,63 +70,100 @@ jobs:
           allow_unmatched_draft_tag: 'false'  # default value = 'true'
 ```
 
-### Sample Cooperative Workflow Including Release Drafter
+### Sample Chained Workflows
 
-Setting up another **separate** GitHub Actions workflow using [Release Drafter](https://github.com/marketplace/actions/release-drafter) is a great combination with this Action! 💪
+#### Including Release Drafter
 
-```yaml
-name: 'Release Drafter'
-
-on: push
-jobs:
-  release-drafter:
-    runs-on: ubuntu-latest
-    steps:
-      # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: toolmantim/release-drafter@v5.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
+Setting up your GitHub Actions workflow to also use [Release Drafter](https://github.com/marketplace/actions/release-drafter) is a great combination with this Action! 💪
 
 _IMPORTANT:_ To enable Release Drafter, you must also include a [`.github/release-drafter.yml` configuration file](https://github.com/marketplace/actions/release-drafter#example) in your repository.
 
-### Sample Chained Workflow Including Publishing to GitHub Package Registry
-
-The following GitHub Actions workflow will publish an existing Draft Release using this Action and then publish that version to the GitHub Package Registry.
-
 ```yaml
-name: 'Publish to GPR'
+name: 'Draft Releases & Release Drafts'
 
 on:
   push:
     # branches to consider in the event; optional, defaults to all
     branches:
       - master
-    # file paths to consider in the event; optional, defaults to all
-    paths:
-      - package.json
 
 jobs:
-  release-and-publish:
+  update_draft_release:
+    runs-on: ubuntu-latest
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: toolmantim/release-drafter@v5.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish_draft_release_on_version_bump:
+    needs: [update_draft_release]
     runs-on: ubuntu-latest
     steps:
       # Does a checkout of your repository at the pushed commit SHA
       - uses: actions/checkout@v1
       # Checks for a version bump to publish an existing Draft Release
-      - uses: JamesMGreene/node-draft-releaser@v1
+      - id: github_release
+        uses: JamesMGreene/node-draft-releaser@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Show the Release URL, just for fun
+      - run: echo "Released at $RELEASE_URL"
+        env:
+          RELEASE_URL: ${{ steps.github_release.outputs.release_url }}
+```
+
+### Including Publishing to GitHub Package Registry
+
+Another great chaining opportunity is following this Action with one to publish the new version to the GitHub Package Registry.
+
+```yaml
+name: 'Release Management'
+
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
+
+jobs:
+  update_draft_release:
+    runs-on: ubuntu-latest
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: toolmantim/release-drafter@v5.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish_draft_release_on_version_bump:
+    needs: [update_draft_release]
+    runs-on: ubuntu-latest
+    steps:
+      # Does a checkout of your repository at the pushed commit SHA
+      - uses: actions/checkout@v1
+      # Checks for a version bump to publish an existing Draft Release
+      - id: github_release
+        uses: JamesMGreene/node-draft-releaser@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Show the Release URL, just for fun
+      - run: echo "Released at $RELEASE_URL"
+        env:
+          RELEASE_URL: ${{ steps.github_release.outputs.release_url }}
+
+  publish_package_to_gpr:
+    needs: [publish_draft_release_on_version_bump]
+    runs-on: ubuntu-latest
+    steps:
+      # Does a checkout of your repository at the pushed commit SHA
+      - uses: actions/checkout@v1
       # Set up the local Node environment for the NPM CLI
       - uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
       - run: npm install
       # Publish the new version to GPR
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-          registry-url: 'https://npm.pkg.github.com'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
