@@ -3,17 +3,15 @@ const requiredEnvVars = [
   'GITHUB_REF',
   'GITHUB_REPOSITORY',
   'GITHUB_SHA',
-  'GITHUB_WORKSPACE'
+  'GITHUB_WORKSPACE',
 ];
 
-const requiredSecrets = [
-  'GITHUB_TOKEN'
-];
+const requiredSecrets = ['GITHUB_TOKEN'];
+
+const isEnvVarFalsy = envVar => !(process.env.hasOwnProperty(envVar) && process.env[envVar]);
 
 function verifyRequiredEnv(): void {
-  const requiredButMissingEnvVars = requiredEnvVars.filter(
-    envVar => !(process.env.hasOwnProperty(envVar) && process.env[envVar]),
-  );
+  const requiredButMissingEnvVars = requiredEnvVars.filter(isEnvVarFalsy);
 
   if (requiredButMissingEnvVars.length > 0) {
     const missingEnvVarsList = requiredButMissingEnvVars.map(key => `- ${key}`).join('\n');
@@ -23,9 +21,7 @@ ${missingEnvVarsList}`,
     );
   }
 
-  const requiredButMissingSecrets = requiredSecrets.filter(
-    secret => !(process.env.hasOwnProperty(secret) && process.env[secret]),
-  );
+  const requiredButMissingSecrets = requiredSecrets.filter(isEnvVarFalsy);
 
   if (requiredButMissingSecrets.length > 0) {
     const missingSecretsList = requiredButMissingSecrets.map(key => `- ${key}`).join('\n');
