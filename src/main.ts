@@ -58,6 +58,7 @@ async function main() {
     // Set the Action's output values
     //
     core.setOutput('version', version);
+    core.setOutput('release_id', publishedRelease.id.toString());
     core.setOutput('release_url', publishedRelease.html_url);
   } catch (err) {
     core.setFailed(err.message);

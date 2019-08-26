@@ -8,6 +8,8 @@ inputs:
 outputs:
   version:
     description: 'The new version number that was released'
+  release_id:
+    description: 'The ID of the Release'
   release_url:
     description: 'The URL to view the published Release page in the GitHub UI'
 runs:
