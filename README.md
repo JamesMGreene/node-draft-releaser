@@ -35,6 +35,9 @@ This Action provides the following outputs:
  - `version`
      - The new version number that was released, e.g. `1.0.0-beta.2`
 
+ - `release_id`
+     - The ID of the Release
+
  - `release_url`
      - The URL to view the published Release page in the GitHub UI
 
@@ -162,6 +165,7 @@ jobs:
         with:
           node-version: '10.x'
           registry-url: 'https://npm.pkg.github.com'
+      # Install dependencies in case there are any publish-related scripts
       - run: npm install
       # Publish the new version to GPR
       - run: npm publish
