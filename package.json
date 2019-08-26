@@ -48,7 +48,6 @@
     "@types/nock": "^10.0.3",
     "@types/node": "^12.7.2",
     "@types/semver": "^6.0.1",
-    "dotenv": "^8.0.0",
     "jest": "^24.8.0",
     "jest-circus": "^24.8.0",
     "nock": "^10.0.6",
