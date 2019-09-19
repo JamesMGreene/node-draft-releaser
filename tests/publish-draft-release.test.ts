@@ -59,16 +59,11 @@ describe('publishDraftRelease', () => {
     beforeEach(async () => {
       nock('https://api.github.com')
         .patch(`/repos/${owner}/${repo}/releases/${someDraftRelease.id}`)
-          .reply((uri, requestBody) => {
-            return [
-              200,
-              {
-                ...someDraftRelease,
-                ...JSON.parse(requestBody as string),
-                published_at: '2019-08-19T03:34:57Z'
-              }
-            ];
-          });
+          .reply(200, (uri, requestBody) => ({
+            ...someDraftRelease,
+            ...requestBody as object,
+            published_at: '2019-08-19T03:34:57Z'
+          }));
     });
 
     it('should update as expected', async () => {
@@ -81,16 +76,11 @@ describe('publishDraftRelease', () => {
     beforeEach(async () => {
       nock('https://api.github.com')
         .patch(`/repos/${owner}/${repo}/releases/${draftPrerelease.id}`)
-          .reply((uri, requestBody) => {
-            return [
-              200,
-              {
-                ...draftPrerelease,
-                ...JSON.parse(requestBody as string),
-                published_at: '2019-08-19T03:34:57Z'
-              }
-            ];
-          });
+          .reply(200, (uri, requestBody) => ({
+            ...draftPrerelease,
+            ...requestBody as object,
+            published_at: '2019-08-19T03:34:57Z'
+          }));
     });
 
     it('should update as expected', async () => {
