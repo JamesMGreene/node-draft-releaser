@@ -100,9 +100,6 @@ git branch -D ${RELEASE_BRANCH}
 # Push the new tags
 git push origin --tags
 
-# Create a new GitHub Release from the latest tag
-hub release create -m v${PKG_VERSION} v${PKG_VERSION}
-
 
 #
 # Reset
@@ -113,3 +110,23 @@ rm -rf node_modules/
 
 # Reinstall the full set of dependencies
 npm install
+
+
+#
+# Manual finish
+#
+
+REPO_URL=$(git remote get-url origin)
+
+# Strip the trailing '.git'
+REPO_URL=${REPO_URL%.git}
+
+# Replace the first instance of 'git@github.com:' with 'https://github.com/'
+REPO_URL=${REPO_URL/git@github.com:/https://github.com/}
+
+# Format a URL for creating a new GitHub Release from the latest tag
+CREATE_RELEASE_URL=${REPO_URL}/releases/new?tag=v${PKG_VERSION}\&title=v${PKG_VERSION}
+
+# Open the page to create a new GitHub Release from the latest tag
+echo 'Finally, go publish a new GitHub Release for this tag!'
+open ${CREATE_RELEASE_URL}
