@@ -100,6 +100,14 @@ git branch -D ${RELEASE_BRANCH}
 # Push the new tags
 git push origin --tags
 
+# Create a new GitHub Release from the latest tag
+hub release create -m v${PKG_VERSION} v${PKG_VERSION}
+
+
+#
+# Reset
+#
+
 # Remove the "node_modules/" directory
 rm -rf node_modules/
 
