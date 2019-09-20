@@ -127,6 +127,21 @@ REPO_URL=${REPO_URL/git@github.com:/https://github.com/}
 # Format a URL for creating a new GitHub Release from the latest tag
 CREATE_RELEASE_URL=${REPO_URL}/releases/new?tag=v${PKG_VERSION}\&title=v${PKG_VERSION}
 
+# Find some utility that will open a URL in the default browser
+BROWSER_OPENER=$(which open || which x-www-browser || which xdg-open || which gnome-open)
+
 # Open the page to create a new GitHub Release from the latest tag
 echo 'Finally, go publish a new GitHub Release for this tag!'
-open ${CREATE_RELEASE_URL}
+
+if [[ -n "${BROWSER_OPENER}" ]]
+then
+  # Launch in a subshell, otherwise `exec` will close the current shell
+  (
+    exec "${BROWSER_OPENER}" "${CREATE_RELEASE_URL}"
+  )
+elif which python >/dev/null
+then
+  python -m webbrowser "${CREATE_RELEASE_URL}"
+else
+  echo "${CREATE_RELEASE_URL}"
+fi
