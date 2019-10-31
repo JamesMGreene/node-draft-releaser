@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/nock": "^11.1.0",
-    "@types/node": "^12.7.6",
+    "@types/node": "^12.12.3",
     "@types/semver": "^6.0.2",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
