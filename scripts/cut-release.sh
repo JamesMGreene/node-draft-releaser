@@ -60,7 +60,8 @@ RELEASE_BRANCH=release/v${MAJOR_VERSION}
 git checkout -b ${RELEASE_BRANCH}
 
 # Removes "node_modules/" from the ".gitignore" file
-sed -i '/node_modules/d' .gitignore
+sed -i.bak '' '/node_modules/d' .gitignore
+rm .gitignore.bak
 
 # Stage the updated ".gitignore" file
 git add .gitignore
