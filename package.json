@@ -44,7 +44,7 @@
     "semver": "^7.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.24",
+    "@types/jest": "^25.1.4",
     "@types/nock": "^11.1.0",
     "@types/node": "^13.1.1",
     "@types/semver": "^7.1.0",
