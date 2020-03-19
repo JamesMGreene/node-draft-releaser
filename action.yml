@@ -5,6 +5,9 @@ inputs:
   allow_unmatched_draft_tag:
     description: 'Should this be allowed to publish an existing Draft Release that is not slated to create a Tag matching the new version number?'
     default: 'true'
+  allow_release_name_update:
+    description: 'Should this Action be allowed to update the name of an existing Draft Release if its current name is a different valid SemVer version number?'
+    default: 'true'
 outputs:
   version:
     description: 'The new version number that was released'

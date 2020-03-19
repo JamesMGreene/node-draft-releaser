@@ -25,7 +25,32 @@ Object {
 }
 `;
 
-exports[`publishDraftRelease draft published as prerelease should update as expected 1`] = `
+exports[`publishDraftRelease draft published as normal release with allowNameUpdate:false should not update the release name if it is a greater version 1`] = `
+Object {
+  "assets": Array [],
+  "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/3/assets",
+  "author": Object {
+    "id": 417751,
+    "login": "JamesMGreene",
+  },
+  "body": "Blah",
+  "created_at": "2019-08-18T03:34:57Z",
+  "draft": false,
+  "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
+  "id": 3,
+  "name": "3.0.0",
+  "prerelease": false,
+  "published_at": "2019-08-19T03:34:57Z",
+  "tag_name": "2.0.0",
+  "tarball_url": null,
+  "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/3/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/3",
+  "zipball_url": null,
+}
+`;
+
+exports[`publishDraftRelease draft published as normal release with allowNameUpdate:false should not update the release name if it is a lesser version 1`] = `
 Object {
   "assets": Array [],
   "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/2/assets",
@@ -39,13 +64,138 @@ Object {
   "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
   "id": 2,
   "name": "2.0.0-beta.1",
+  "prerelease": false,
+  "published_at": "2019-08-19T03:34:57Z",
+  "tag_name": "2.0.0",
+  "tarball_url": null,
+  "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/2/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/2",
+  "zipball_url": null,
+}
+`;
+
+exports[`publishDraftRelease draft published as normal release with allowNameUpdate:false should not update the release name if it is not a version 1`] = `
+Object {
+  "assets": Array [],
+  "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/4/assets",
+  "author": Object {
+    "id": 417751,
+    "login": "JamesMGreene",
+  },
+  "body": "Blah",
+  "created_at": "2019-08-18T03:34:57Z",
+  "draft": false,
+  "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
+  "id": 4,
+  "name": "The Big One!",
+  "prerelease": false,
+  "published_at": "2019-08-19T03:34:57Z",
+  "tag_name": "2.0.0",
+  "tarball_url": null,
+  "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/4/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/4",
+  "zipball_url": null,
+}
+`;
+
+exports[`publishDraftRelease draft published as normal release with allowNameUpdate:true should not update the release name if it is not a version 1`] = `
+Object {
+  "assets": Array [],
+  "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/4/assets",
+  "author": Object {
+    "id": 417751,
+    "login": "JamesMGreene",
+  },
+  "body": "Blah",
+  "created_at": "2019-08-18T03:34:57Z",
+  "draft": false,
+  "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
+  "id": 4,
+  "name": "The Big One!",
+  "prerelease": false,
+  "published_at": "2019-08-19T03:34:57Z",
+  "tag_name": "2.0.0",
+  "tarball_url": null,
+  "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/4/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/4",
+  "zipball_url": null,
+}
+`;
+
+exports[`publishDraftRelease draft published as normal release with allowNameUpdate:true should update the release name if it is a greater version 1`] = `
+Object {
+  "assets": Array [],
+  "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/3/assets",
+  "author": Object {
+    "id": 417751,
+    "login": "JamesMGreene",
+  },
+  "body": "Blah",
+  "created_at": "2019-08-18T03:34:57Z",
+  "draft": false,
+  "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
+  "id": 3,
+  "name": "2.0.0",
+  "prerelease": false,
+  "published_at": "2019-08-19T03:34:57Z",
+  "tag_name": "2.0.0",
+  "tarball_url": null,
+  "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/3/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/3",
+  "zipball_url": null,
+}
+`;
+
+exports[`publishDraftRelease draft published as normal release with allowNameUpdate:true should update the release name if it is a lesser version 1`] = `
+Object {
+  "assets": Array [],
+  "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/2/assets",
+  "author": Object {
+    "id": 417751,
+    "login": "JamesMGreene",
+  },
+  "body": "Blah",
+  "created_at": "2019-08-18T03:34:57Z",
+  "draft": false,
+  "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
+  "id": 2,
+  "name": "2.0.0",
+  "prerelease": false,
+  "published_at": "2019-08-19T03:34:57Z",
+  "tag_name": "2.0.0",
+  "tarball_url": null,
+  "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/2/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/2",
+  "zipball_url": null,
+}
+`;
+
+exports[`publishDraftRelease draft published as prerelease should update as expected 1`] = `
+Object {
+  "assets": Array [],
+  "assets_url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/5/assets",
+  "author": Object {
+    "id": 417751,
+    "login": "JamesMGreene",
+  },
+  "body": "Blah",
+  "created_at": "2019-08-18T03:34:57Z",
+  "draft": false,
+  "html_url": "https://github.com/JamesMGreene/test-repo/releases/tag/untagged-29db7ff348b9db3f003e",
+  "id": 5,
+  "name": "2.0.0-beta.1",
   "prerelease": true,
   "published_at": "2019-08-19T03:34:57Z",
   "tag_name": "2.0.0-beta.1",
   "tarball_url": null,
   "target_commitish": "deadbeefcafe1c6e148a9be56893bed50abadbed",
-  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/2/assets{?name,label}",
-  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/2",
+  "upload_url": "https://uploads.github.com/repos/JamesMGreene/test-repo/releases/5/assets{?name,label}",
+  "url": "https://api.github.com/repos/JamesMGreene/test-repo/releases/5",
   "zipball_url": null,
 }
 `;

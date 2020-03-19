@@ -26,6 +26,7 @@ async function main() {
     // Get the Action's input values
     //
     const tagMustMatch = core.getInput('allow_unmatched_draft_tag').toLowerCase() === 'false';
+    const allowNameUpdate = core.getInput('allow_release_name_update').toLowerCase() === 'false';
 
     // Get the package version from the current commit
     const version = getVersion();
@@ -52,7 +53,7 @@ async function main() {
     }
 
     // Publish that draft release
-    const publishedRelease = await publishDraftRelease(targetDraft, version);
+    const publishedRelease = await publishDraftRelease(targetDraft, version, allowNameUpdate);
 
     //
     // Set the Action's output values
@@ -60,6 +61,7 @@ async function main() {
     core.setOutput('version', version);
     core.setOutput('release_id', publishedRelease.id.toString());
     core.setOutput('release_url', publishedRelease.html_url);
+    core.setOutput('release_name', publishedRelease.name)
   } catch (err) {
     core.setFailed(err.message);
   }

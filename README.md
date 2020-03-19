@@ -27,6 +27,10 @@ This Action can react to the following inputs:
      - Should this Action be allowed to publish an existing Draft Release that is _not_ slated to create a Tag matching the new version number?
      - Valid values: `'true'` or `'false'` _(as a **string**)_
      - Defaults to `'true'`.
+ - `allow_release_name_update` _(optional)_
+     - Should this Action be allowed to update the name of an existing Draft Release _if_ its current name is a different valid SemVer version number?
+     - Valid values: `'true'` or `'false'` _(as a **string**)_
+     - Defaults to `'true'`.
 
 #### Outputs
 
@@ -40,6 +44,9 @@ This Action provides the following outputs:
 
  - `release_url`
      - The URL to view the published Release page in the GitHub UI
+
+ - `release_name`
+     - The name of the Release
 
 ## Examples
 
@@ -175,4 +182,4 @@ jobs:
 
 ## License
 
-[MIT License](LICENSE.md) (c) 2019 James M. Greene
+[MIT License](LICENSE.md) (c) 2020 James M. Greene
