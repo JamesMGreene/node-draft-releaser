@@ -132,6 +132,8 @@ CREATE_RELEASE_URL=${REPO_URL}/releases/new?tag=v${PKG_VERSION}\&title=v${PKG_VE
 BROWSER_OPENER=$(which open || which x-www-browser || which xdg-open || which gnome-open)
 
 # Open the page to create a new GitHub Release from the latest tag
+echo ''
+echo ''
 echo 'Finally, go publish a new GitHub Release for this tag!'
 
 if [[ -n "${BROWSER_OPENER}" ]]
