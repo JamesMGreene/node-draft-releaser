@@ -61,7 +61,7 @@ async function main() {
     core.setOutput('version', version);
     core.setOutput('release_id', publishedRelease.id.toString());
     core.setOutput('release_url', publishedRelease.html_url);
-    core.setOutput('release_name', publishedRelease.name)
+    core.setOutput('release_name', publishedRelease.name);
   } catch (err) {
     core.setFailed(err.message);
   }

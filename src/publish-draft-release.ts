@@ -2,11 +2,16 @@ import { context, GitHub } from '@actions/github';
 import semver from 'semver';
 import { IRelease } from './types/index';
 
-async function publishDraftRelease(draftRelease: IRelease, version: string, allowNameUpdate: boolean): Promise<IRelease> {
+async function publishDraftRelease(
+  draftRelease: IRelease,
+  version: string,
+  allowNameUpdate: boolean,
+): Promise<IRelease> {
   const octokit = new GitHub(process.env.GITHUB_TOKEN as string);
 
   const draftReleaseNameIsVersion = draftRelease.name && semver.valid(draftRelease.name);
-  const shouldUpdateReleaseName = !draftRelease.name || (allowNameUpdate && draftReleaseNameIsVersion);
+  const shouldUpdateReleaseName =
+    !draftRelease.name || (allowNameUpdate && draftReleaseNameIsVersion);
 
   const prereleaseParts = semver.prerelease(version);
   const isPrerelease = Array.isArray(prereleaseParts) && prereleaseParts.length > 0;
