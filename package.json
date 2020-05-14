@@ -1,6 +1,6 @@
 {
   "name": "node-draft-releaser",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Automatically publish an existing Draft Release when the \"package.json\" version changes",
   "license": "MIT",
   "author": {
