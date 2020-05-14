@@ -10,7 +10,7 @@ async function getDraftReleases(): Promise<IRelease[]> {
     const releases = (await octokit.paginate(options)) as IRelease[];
 
     // Filter down to just the Draft Releases
-    return releases.filter(release => release.draft === true);
+    return releases.filter((release) => release.draft === true);
   } catch (err) {
     if (err.status === 404) {
       return [];

@@ -12,7 +12,7 @@ async function getTagNames(): Promise<string[]> {
     const tags = (await octokit.paginate(options)) as ITag[];
 
     // Filter down to just the SemVer-like tag names, removing any 'v'/'V' prefixes
-    return tags.map(tag => tag.name.replace(VERSION_MATCH, '$1')).filter(Boolean);
+    return tags.map((tag) => tag.name.replace(VERSION_MATCH, '$1')).filter(Boolean);
   } catch (err) {
     if (err.status === 404) {
       return [];
