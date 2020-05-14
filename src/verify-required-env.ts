@@ -8,13 +8,13 @@ const requiredEnvVars = [
 
 const requiredSecrets = ['GITHUB_TOKEN'];
 
-const isEnvVarFalsy = envVar => !(process.env.hasOwnProperty(envVar) && process.env[envVar]);
+const isEnvVarFalsy = (envVar) => !(process.env.hasOwnProperty(envVar) && process.env[envVar]);
 
 function verifyRequiredEnv(): void {
   const requiredButMissingEnvVars = requiredEnvVars.filter(isEnvVarFalsy);
 
   if (requiredButMissingEnvVars.length > 0) {
-    const missingEnvVarsList = requiredButMissingEnvVars.map(key => `- ${key}`).join('\n');
+    const missingEnvVarsList = requiredButMissingEnvVars.map((key) => `- ${key}`).join('\n');
     throw new Error(
       `The following environment variables are required for this GitHub Action to run:
 ${missingEnvVarsList}`,
@@ -24,7 +24,7 @@ ${missingEnvVarsList}`,
   const requiredButMissingSecrets = requiredSecrets.filter(isEnvVarFalsy);
 
   if (requiredButMissingSecrets.length > 0) {
-    const missingSecretsList = requiredButMissingSecrets.map(key => `- ${key}`).join('\n');
+    const missingSecretsList = requiredButMissingSecrets.map((key) => `- ${key}`).join('\n');
     throw new Error(
       `The following secrets are required for this GitHub Action to run:
 ${missingSecretsList}`,
